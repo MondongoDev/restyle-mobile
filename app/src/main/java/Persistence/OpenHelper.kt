@@ -1,0 +1,132 @@
+package Persistence
+import Beans.Projects
+import android.content.ContentValues
+import android.content.Context
+import android.database.sqlite.SQLiteDatabase
+import android.database.sqlite.SQLiteOpenHelper
+
+class OpenHelper(context:Context): SQLiteOpenHelper(context, "projects.db", null, 1)  {
+
+    override fun onCreate(db: SQLiteDatabase?) {
+        db?.execSQL("CREATE TABLE projects (id INTEGER PRIMARY KEY AUTOINCREMENT, business_id INTEGER, contractor_id INTEGER, description TEXT, finish_date TEXT, image TEXT, name TEXT, start_date TEXT)")
+
+        // Insertar automáticamente dos valores en la tabla projects
+        val project1 = ContentValues().apply {
+            put("business_id", 1)
+            put("contractor_id", 1)
+            put("description", "Proyecto de construcción de oficina")
+            put("finish_date", "2024-12-31")
+            put("image", "https://images.squarespace-cdn.com/content/v1/5d0e69beefadae000134e1ee/1575923115022-24SLDAEGKCMJ6YFTQRCA/Bernharts-blog-plan-home-remodeling.jpg")
+            put("name", "Construcción Oficina")
+            put("start_date", "2024-01-01")
+        }
+
+        val project2 = ContentValues().apply {
+            put("business_id", 2)
+            put("contractor_id", 2)
+            put("description", "Proyecto de renovación de vivienda")
+            put("finish_date", "2024-11-30")
+            put("image", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwqV96MdL5YmBHyk-d_7sjh2dwvjSIMLSXAg&s")
+            put("name", "Renovación Vivienda")
+            put("start_date", "2024-02-15")
+        }
+
+        // Insertar los proyectos en la base de datos
+        db?.insert("projects", null, project1)
+        db?.insert("projects", null, project2)
+    }
+
+    override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
+        db?.execSQL("DROP TABLE IF EXISTS projects")
+        onCreate(db)
+    }
+
+    fun newProject(p: Projects) {
+        val defaultBusinessId = 1
+        val defaultContractorId = 1
+        val defaultDescription = "No description provided"
+        val defaultFinishDate = "2025-01-15 00:00:00"
+        val defaultImage = "https://www.budgetdumpster.com/images/blog/home-remodel-sketches-600x300.jpg"
+        val defaultName = "Unnamed Project"
+        val defaultStartDate = "2024-09-15 00:00:00"
+
+        // Crear el objeto ContentValues y asignar los valores, usando valores por defecto si están vacíos
+        val contentValues = ContentValues().apply {
+            put("business_id", if (p.business_id != 1) p.business_id else defaultBusinessId)
+            put("contractor_id", if (p.contractor_id != 1) p.contractor_id else defaultContractorId)
+            put("description", if (p.description.isNotEmpty()) p.description else defaultDescription)
+            put("finish_date", if (p.finish_date.isNotEmpty()) p.finish_date else defaultFinishDate)
+            put("image", if (p.image.isNotEmpty()) p.image else defaultImage)
+            put("name", if (p.name.isNotEmpty()) p.name else defaultName)
+            put("start_date", if (p.start_date.isNotEmpty()) p.start_date else defaultStartDate)
+        }
+
+        // Insertar los valores en la base de datos
+        writableDatabase.insert("projects", null, contentValues)
+    }
+
+    fun getProjects():MutableList<Projects> {
+        val db=this.readableDatabase
+        val query=db.rawQuery("SELECT * FROM projects",null)
+        val projects= mutableListOf<Projects>()
+        if (query.moveToFirst()){
+            do{
+                projects.add(Projects(query.getInt(0),query.getInt(1),query.getInt(2),query.getString(3),query.getString(4),query.getString(5),query.getString(6),query.getString(7)))
+            }while (query.moveToNext())
+        }
+        query.close()
+        db.close()
+        return projects
+    }
+
+    fun deleteProject(p:Projects){
+        writableDatabase.execSQL("DELETE FROM projects WHERE id = ${p.id}")
+    }
+
+    fun getProjectById(id:Int):Projects?{
+        val db=this.readableDatabase
+        val query=db.rawQuery("SELECT * FROM projects WHERE id = $id",null)
+
+       return if (query.moveToFirst()){
+            val project=Projects(query.getInt(0),query.getInt(1),query.getInt(2),query.getString(3),query.getString(4),query.getString(5),query.getString(6),query.getString(7))
+            query.close()
+            db.close()
+            project
+        }else{
+            query.close()
+            db.close()
+            null
+        }
+    }
+
+    fun UpdateProject(p:Projects){
+        val db=this.readableDatabase
+
+        val cursor = db.rawQuery("SELECT * FROM projects WHERE id = ${p.id}",null)
+
+        if (cursor.moveToFirst()) {
+            val currentBusinessId = cursor.getInt(cursor.getColumnIndexOrThrow("business_id"))
+            val currentContractorId = cursor.getInt(cursor.getColumnIndexOrThrow("contractor_id"))
+            val currentDescription = cursor.getString(cursor.getColumnIndexOrThrow("description"))
+            val currentFinishDate = cursor.getString(cursor.getColumnIndexOrThrow("finish_date"))
+            val currentImage = cursor.getString(cursor.getColumnIndexOrThrow("image"))
+            val currentName = cursor.getString(cursor.getColumnIndexOrThrow("name"))
+            val currentStartDate = cursor.getString(cursor.getColumnIndexOrThrow("start_date"))
+
+            cursor.close()
+
+            val businessId = if (p.business_id != 1) p.business_id else currentBusinessId
+            val contractorId = if (p.contractor_id != 1) p.contractor_id else currentContractorId
+            val description = if (p.description.isNotBlank()) p.description else currentDescription
+            val finishDate = if (p.finish_date.isNotBlank()) p.finish_date else currentFinishDate
+            val image = if (p.image.isNotBlank()) p.image else currentImage
+            val name = if (p.name.isNotBlank()) p.name else currentName
+            val startDate = if (p.start_date.isNotBlank()) p.start_date else currentStartDate
+
+            writableDatabase.execSQL("UPDATE projects SET business_id=$businessId, contractor_id=$contractorId, description='$description', finish_date='$finishDate', image='$image', name='$name', start_date='$startDate' WHERE id=${p.id}")
+        }else{
+            cursor.close()
+            throw Exception("Proyecto no encontrado con id: ${p.id}")
+        }
+    }
+}
