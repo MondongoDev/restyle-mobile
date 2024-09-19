@@ -8,50 +8,98 @@
     android:padding="20dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@color/gray">
 
+    <!-- Título Portafolio -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Portafolio"
         android:textStyle="bold"
-        android:textAlignment="center"
+        android:textAlignment="textStart"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="10dp"
-        android:textSize="24sp"/>
+        android:textSize="36sp"
+        android:background="@color/white"
+        android:layout_marginStart="28dp"
+        android:layout_marginEnd="28dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:textColor="@color/blue" />
 
+    <!-- TabLayout para Información y Proyectos -->
     <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
-        android:layout_marginEnd="20dp"> <!-- Ajusta el margen según tus necesidades -->
+        android:layout_marginEnd="30dp"
+        android:layout_marginStart="30dp"
+        android:background="@color/gray"
+        app:tabSelectedTextColor="@color/blue"
+        app:tabTextColor="@color/darker_gray">
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tab_info"
-            android:text="Información" />
+            android:text="Información"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tab_projects"
-            android:text="Proyectos" />
-
+            android:text="Proyectos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </com.google.android.material.tabs.TabLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="RenovaPro"
+        android:textStyle="bold"
+        android:textAlignment="textStart"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginStart="28dp"
+        android:textSize="24sp"
+        android:id="@+id/txtNombreEmpresa" />
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Lista de proyectos del portafolio"
+        android:textStyle="bold"
+        android:textAlignment="textStart"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="2dp"
+        android:layout_marginStart="30dp"
+        android:textSize="15sp"
+        android:id="@+id/txtProyectos"
+        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvProjects"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"/>
+        android:layout_margin="20dp"
+        />
+
+    <!-- ViewPager2 para manejar el contenido de las pestañas -->
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"/>
 
+    <!-- Botón para agregar proyectos (que se ocultará/mostrará dinámicamente) -->
     <Button
+        android:id="@+id/btnAddProject"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Agregar Proyecto"
-        android:layout_margin="20dp"
-        android:id="@+id/btnAddProject"/>
-
+        android:layout_margin="20dp"/>
 </LinearLayout>

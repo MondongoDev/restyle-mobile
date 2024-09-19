@@ -1,4 +1,5 @@
 package Persistence
+import Beans.Businesses
 import Beans.Projects
 import android.content.ContentValues
 import android.content.Context
@@ -8,7 +9,14 @@ import android.database.sqlite.SQLiteOpenHelper
 class OpenHelper(context:Context): SQLiteOpenHelper(context, "projects.db", null, 1)  {
 
     override fun onCreate(db: SQLiteDatabase?) {
-        db?.execSQL("CREATE TABLE projects (id INTEGER PRIMARY KEY AUTOINCREMENT, business_id INTEGER, contractor_id INTEGER, description TEXT, finish_date TEXT, image TEXT, name TEXT, start_date TEXT)")
+        db?.execSQL("CREATE TABLE projects (id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "business_id INTEGER, contractor_id INTEGER, description TEXT, " +
+                "finish_date TEXT, image TEXT, name TEXT, start_date TEXT)")
+
+
+        db?.execSQL("CREATE TABLE businesses (id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "address TEXT, city TEXT, description TEXT, " +
+                "expertise TEXT, image TEXT, name TEXT, remodeler_id INTEGER)")
 
         // Insertar automáticamente dos valores en la tabla projects
         val project1 = ContentValues().apply {
@@ -31,9 +39,31 @@ class OpenHelper(context:Context): SQLiteOpenHelper(context, "projects.db", null
             put("start_date", "2024-02-15")
         }
 
+        val business1 = ContentValues().apply {
+            put("address", "123 Main St")
+            put("city", "New York")
+            put("description", "Especialistas en renovaciones residenciales, ofreciendo soluciones innovadoras y de alta calidad. Con más de 10 años de experiencia. Ubicados en el distrito de San Miguel en Lima, Perú.")
+            put("expertise", "Home renovations")
+            put("image", "https://drive.google.com/file/d/1I1BLN1-GQMm0C3skPRxf1i8P1_r31NXt/view?usp=sharing")
+            put("name", "RenovaPro")
+            put("remodeler_id", 1)
+        }
+        val business2 = ContentValues().apply {
+            put("address", "456 Elm St")
+            put("city", "Los Angeles")
+            put("description", "Expert in commercial remodeling")
+            put("expertise", "Office spaces")
+            put("image", "https://media.licdn.com/dms/image/v2/C4E0BAQGRKqgwlprysg/company-logo_200_200/company-logo_200_200/0/1640188159717/pro_commercial_cleaning_inc_logo?e=2147483647&v=beta&t=_dkF0T2G6przXDb2c7b4S19MKswRHz9P7fD0qN461Lk")
+            put("name", "Commercial Pro Inc.")
+            put("remodeler_id", 1)
+        }
+
+
         // Insertar los proyectos en la base de datos
         db?.insert("projects", null, project1)
         db?.insert("projects", null, project2)
+        db?.insert("businesses", null, business1)
+        db?.insert("businesses", null, business2)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
@@ -98,7 +128,21 @@ class OpenHelper(context:Context): SQLiteOpenHelper(context, "projects.db", null
             null
         }
     }
+    fun getBusinessesById(id:Int):Businesses?{
+        val db=this.readableDatabase
+        val query=db.rawQuery("SELECT * FROM businesses WHERE id = $id",null)
 
+        return if (query.moveToFirst()){
+            val business=Businesses(query.getInt(0),query.getString(1),query.getString(2),query.getString(3),query.getString(4),query.getString(5),query.getString(6),query.getInt(7))
+            query.close()
+            db.close()
+            business
+        }else{
+            query.close()
+            db.close()
+            null
+        }
+    }
     fun UpdateProject(p:Projects){
         val db=this.readableDatabase
 

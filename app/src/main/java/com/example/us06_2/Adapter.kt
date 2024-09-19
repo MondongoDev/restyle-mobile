@@ -3,19 +3,21 @@ package com.example.us06_2
 import Beans.Projects
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.adapter.FragmentStateAdapter
 
-class Adapter(val projectsList:List<Projects>): RecyclerView.Adapter<ProjectsViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProjectsViewHolder {
-        val layoutInflater= LayoutInflater.from(parent.context)
-        return ProjectsViewHolder(layoutInflater.inflate(R.layout.card, parent, false))
-    }
-
-    override fun onBindViewHolder(holder: ProjectsViewHolder, position: Int) {
-        holder.render(projectsList[position])
-    }
-
+class Adapter(activity: FragmentActivity) : FragmentStateAdapter(activity) {
     override fun getItemCount(): Int {
-        return projectsList.size
+        return 2 // Número de pestañas
+    }
+
+    override fun createFragment(position: Int): Fragment {
+        return if (position == 0) {
+            InfoFragment() // Fragmento para Información
+        } else {
+            ProjectsFragment() // Fragmento para Proyectos
+        }
     }
 }

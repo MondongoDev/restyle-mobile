@@ -1,34 +1,54 @@
 package com.example.us06_2
 
-import Persistence.OpenHelper
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
+import android.view.View
+import android.widget.Button
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 
 class MainActivity : AppCompatActivity() {
-    lateinit var dbHelper: OpenHelper
+
+    private lateinit var tabLayout: TabLayout
+    private lateinit var viewPager: ViewPager2
+    private lateinit var addProjectButton: Button
+    private lateinit var NombreEmpresa: TextView
+    private lateinit var textoProyectos: TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_main)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
-        getAllProjects()
 
-    }
+        // Inicialización de vistas
+        tabLayout = findViewById(R.id.tabLayout)
+        viewPager = findViewById(R.id.viewPager)
+        addProjectButton = findViewById(R.id.btnAddProject)
+        NombreEmpresa = findViewById(R.id.txtNombreEmpresa)
+        textoProyectos = findViewById(R.id.txtProyectos)
 
-    private fun getAllProjects(){
-        dbHelper = OpenHelper(this)
-        val listaP = dbHelper.getProjects()
-        val recycler = findViewById<RecyclerView>(R.id.rvProjects)
-        recycler.layoutManager = LinearLayoutManager(applicationContext)
-        recycler.adapter = Adapter(listaP)
+        // Configurar ViewPager con el adaptador para manejar las pestañas
+        val adapter = Adapter(this)
+        viewPager.adapter = adapter
+
+        // Conectar TabLayout con ViewPager2
+        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+            tab.text = if (position == 0) "Información" else "Proyectos"
+        }.attach()
+
+        // Ocultar o mostrar el botón dependiendo de la pestaña seleccionada
+        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                if (tab?.position == 1) {
+                    addProjectButton.visibility = View.VISIBLE // Mostrar botón en la pestaña Proyectos
+                } else {
+                    addProjectButton.visibility = View.GONE // Ocultar en Información
+                }
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {}
+            override fun onTabReselected(tab: TabLayout.Tab?) {}
+        })
     }
 }
