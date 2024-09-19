@@ -3,8 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/search_businesses"
-    tools:context=".business_search.Activity.SearchBusinessesActivity"
+    android:id="@+id/business_profile"
+    tools:context=".business_search.Activity.BusinessProfileActivity"
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -62,9 +62,82 @@
 
     <!-- Content -->
 
+    <!-- Profile Card -->
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp">
+
+            <TextView
+                android:id="@+id/businessCardName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Nombre Empresa"
+                android:textColor="#3F51B5"
+                android:textSize="25sp"
+                android:fontFamily="@font/montserrat_bold"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/businessCardExpertise"
+                app:layout_constraintHorizontal_bias="0"/>
+
+            <TextView
+                android:id="@+id/businessCardAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Direccion"
+                android:textSize="12sp"
+                android:fontFamily="@font/montserrat"
+                app:layout_constraintTop_toBottomOf="@id/businessCardName"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/businessCardCity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ciudad"
+                android:textSize="11sp"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/montserrat"
+                app:layout_constraintStart_toEndOf="@id/businessCardAddress"
+                app:layout_constraintTop_toBottomOf="@id/businessCardName"/>
+
+            <TextView
+                android:id="@+id/businessCardExpertise"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Expertise"
+                android:textColor="#3F51B5"
+                android:textSize="14sp"
+                android:fontFamily="@font/montserrat"
+                android:padding="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <ImageView
+                android:layout_width="4dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/card_line"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/businessCardName"
+                app:layout_constraintEnd_toStartOf="@id/businessCardExpertise"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
     <!-- Tabs -->
     <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tab_layout"
+        android:id="@+id/business_profile_tab_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAllCaps="false"
@@ -72,63 +145,38 @@
         app:tabSelectedTextColor="#3F51B5"
         app:tabTextAppearance="@style/TextAppearance.AppCompat.Small"
         app:tabTextColor="#8D8D8D"
-        app:tabIndicatorFullWidth="true">
+        app:tabIndicatorFullWidth="true"
+        android:layout_marginHorizontal="20dp">
 
         <com.google.android.material.tabs.TabItem
-            android:id="@+id/tab_home"
+            android:id="@+id/business_tab_profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hogar" />
+            android:text="Perfil" />
 
         <com.google.android.material.tabs.TabItem
-            android:id="@+id/tab_rooms"
+            android:id="@+id/business_tab_projects"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Habitaciones" />
+            android:text="Proyectos" />
 
         <com.google.android.material.tabs.TabItem
-            android:id="@+id/tab_kitchen"
+            android:id="@+id/business_tab_portfolio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cocina" />
+            android:text="Portafolio" />
 
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/tab_others"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Otros" />
     </com.google.android.material.tabs.TabLayout>
 
-    <!-- Search Bar -->
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textField"
+    <!-- Tab Content -->
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/business_profile_view_pager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="20dp"
-        android:paddingTop="10dp"
-        android:paddingRight="20dp"
-        android:paddingBottom="10dp"
-        app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
-        app:startIconDrawable="@drawable/baseline_search_24"
-        app:startIconTint="#8D8D8D">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-    </com.google.android.material.textfield.TextInputLayout>
+        android:layout_height="wrap_content" />
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <!-- Cards Recycler View -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewBusinesses"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginBottom="125dp"/>
 
         <!-- Bottom Navigation -->
         <RelativeLayout
