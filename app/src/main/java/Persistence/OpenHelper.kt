@@ -44,7 +44,7 @@ class OpenHelper(context:Context): SQLiteOpenHelper(context, "projects.db", null
             put("city", "New York")
             put("description", "Especialistas en renovaciones residenciales, ofreciendo soluciones innovadoras y de alta calidad. Con más de 10 años de experiencia. Ubicados en el distrito de San Miguel en Lima, Perú.")
             put("expertise", "Home renovations")
-            put("image", "https://drive.google.com/file/d/1I1BLN1-GQMm0C3skPRxf1i8P1_r31NXt/view?usp=sharing")
+            put("image", "https://renova-pro.ca/wp-content/uploads/2024/05/cropped-RENOVAPOR-2-1500x1000.png")
             put("name", "RenovaPro")
             put("remodeler_id", 1)
         }
@@ -68,6 +68,7 @@ class OpenHelper(context:Context): SQLiteOpenHelper(context, "projects.db", null
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         db?.execSQL("DROP TABLE IF EXISTS projects")
+        db?.execSQL("DROP TABLE IF EXISTS businesses")
         onCreate(db)
     }
 

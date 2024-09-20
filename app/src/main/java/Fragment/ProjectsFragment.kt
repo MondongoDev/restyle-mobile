@@ -1,5 +1,6 @@
-package com.example.us06_2
+package Fragment
 
+import Adapter.ProjectAdapter
 import Persistence.OpenHelper
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.us06_2.R
 
 class ProjectsFragment : Fragment() {
     lateinit var dbHelper: OpenHelper
@@ -15,16 +17,12 @@ class ProjectsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflar el layout para el fragmento de Proyectos
-        val view = inflater.inflate(R.layout.card, container, false)
-        dbHelper = OpenHelper(requireContext())
-
-        val listaP = dbHelper.getProjects()
-
-        val recycler = view.findViewById<RecyclerView>(R.id.rvProjects)
-        recycler.layoutManager = LinearLayoutManager(context)
-        recycler.adapter = Adapter(listaP)
-
-        return view
+        return inflater.inflate(R.layout.projects_info, container, false).apply {
+            dbHelper = OpenHelper(requireContext())
+            findViewById<RecyclerView>(R.id.rvProjects)?.apply {
+                layoutManager = LinearLayoutManager(context)
+                adapter = ProjectAdapter(dbHelper.getProjects())
+            }
+        }
     }
 }
