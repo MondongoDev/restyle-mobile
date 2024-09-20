@@ -1,4 +1,4 @@
-package com.example.us06_2
+package com.example.restyle_mobile
 
 import Beans.Businesses
 import android.view.View
@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.example.us06_2.R
 
 class BussinessesViewHolder(view:View):RecyclerView.ViewHolder(view) {
     var businessId=view.findViewById<TextView>(R.id.bussinessId)

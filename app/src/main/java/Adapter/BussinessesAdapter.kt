@@ -4,8 +4,8 @@ import Beans.Businesses
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.us06_2.BussinessesViewHolder
-import com.example.us06_2.R
+import com.example.restyle_mobile.BussinessesViewHolder
+import com.example.restyle_mobile.R
 
 class BussinessesAdapter(val businesses: List<Businesses>) : RecyclerView.Adapter<BussinessesViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BussinessesViewHolder {

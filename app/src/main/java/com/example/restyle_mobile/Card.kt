@@ -1,10 +1,11 @@
-package com.example.us06_2
+package com.example.restyle_mobile
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.us06_2.R
 
 class Card : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
