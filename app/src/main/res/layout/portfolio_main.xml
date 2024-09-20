@@ -147,6 +147,7 @@
         android:id="@+id/btnAddProject"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/blue"
         android:text="Agregar Proyecto"
         android:layout_margin="20dp"/>
 
