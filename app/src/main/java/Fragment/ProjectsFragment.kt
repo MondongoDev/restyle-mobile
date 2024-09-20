@@ -9,7 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.us06_2.R
+import com.example.restyle_mobile.R
 
 class ProjectsFragment : Fragment() {
     lateinit var dbHelper: OpenHelper

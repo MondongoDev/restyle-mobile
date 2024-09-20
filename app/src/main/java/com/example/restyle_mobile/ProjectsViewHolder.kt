@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.example.us06_2.R
+import com.example.restyle_mobile.R
 
 class ProjectsViewHolder(view: View): RecyclerView.ViewHolder(view) {
     var projectId=view.findViewById<TextView>(R.id.textId)

@@ -5,7 +5,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.us06_2.R
+import com.example.restyle_mobile.R
 
 class Card : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
