@@ -30,5 +30,10 @@ class Projects {
         this.name = name
         this.start_date = start_date
     }
-
+    constructor(description: String,image: String, name: String)
+    {
+        this.description = description
+        this.image = image
+        this.name = name
+    }
 }

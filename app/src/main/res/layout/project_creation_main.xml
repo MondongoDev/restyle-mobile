@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.restyle_mobile.Portfolio"
+    android:id="@+id/project_creation_main"
+    tools:context="com.example.restyle_mobile.ProjectCreation"
     android:background="@color/gray">
 
     <!-- Toolbar -->
@@ -59,12 +58,13 @@
         </androidx.appcompat.widget.Toolbar>
 
     </LinearLayout>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Portafolio"
+        android:text="Agregar Proyecto"
         android:textStyle="bold"
-        android:textAlignment="textStart"
+        android:textAlignment="center"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="10dp"
         android:textSize="36sp"
@@ -77,79 +77,117 @@
         android:paddingBottom="10dp"
         android:textColor="@color/blue" />
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayout"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginEnd="30dp"
-        android:layout_marginStart="30dp"
-        android:background="@color/gray"
-        app:tabSelectedTextColor="@color/blue"
-        app:tabTextColor="@color/darker_gray">
-
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/tab_info"
-            android:text="Información"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/tab_projects"
-            android:text="Proyectos"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </com.google.android.material.tabs.TabLayout>
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginEnd="28dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:orientation="vertical"
+        android:background="@color/light_purple"
+        >
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="10dp">
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="RenovaPro"
+                android:text="Agrega imágenes"
                 android:textStyle="bold"
                 android:textAlignment="textStart"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="10dp"
-                android:layout_marginStart="28dp"
-                android:textSize="24sp"
-                android:id="@+id/txtNombreEmpresa" />
+                android:textSize="16sp"/>
+            <ImageButton
+                android:id="@+id/add_image_button"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:contentDescription="Agregar imagen"
+                android:src="@drawable/baseline_image_default_24"
+                android:background="@color/gray"
+                android:layout_marginBottom="20dp"/>
+
+            <ImageView
+                android:id="@+id/project_image_view"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:contentDescription="Imagen del proyecto"
+                android:visibility="gone"
+                android:scaleType="centerCrop"
+                android:background="@color/gray"/>
+
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Lista de proyectos del portafolio"
+                android:text="Agrega Título"
                 android:textStyle="bold"
                 android:textAlignment="textStart"
                 android:layout_marginTop="20dp"
-                android:layout_marginBottom="2dp"
-                android:layout_marginStart="30dp"
-                android:textSize="15sp"
-                android:id="@+id/txtProyectos"/>
+                android:layout_marginBottom="10dp"
+                android:textSize="16sp"/>
 
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/viewPager"
+            <EditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="50dp"
+                android:id="@+id/project_title"
+                android:background="@color/gray"
+                android:hint=" Texto"/>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Agrega Descripción"
+                android:textStyle="bold"
+                android:textAlignment="textStart"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:textSize="16sp"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:id="@+id/project_description"
+                android:background="@color/gray"
+                android:hint=" Texto"/>
 
         </LinearLayout>
-    </ScrollView>
 
-    <Button
-        android:id="@+id/btnAddProject"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/blue"
-        android:text="Agregar Proyecto"
-        android:layout_margin="20dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="end"
+            >
+
+            <Button
+                android:id="@+id/btnCancelProject"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="@color/blue"
+                android:text="Cancel"/>
+
+            <Button
+                android:id="@+id/btnSaveProject"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/blue"
+                android:text="Guardar"
+                android:layout_margin="20dp"/>
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
 
     <!-- Bottom Navigation -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -163,5 +201,4 @@
         app:itemTextColor="@color/white"
         app:labelVisibilityMode="labeled"
         app:menu="@menu/bottom_navigation_menu" />
-
 </LinearLayout>

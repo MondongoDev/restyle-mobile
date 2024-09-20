@@ -1,6 +1,7 @@
 package com.example.restyle_mobile
 
 import Adapter.Adapter
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -60,6 +61,11 @@ class Portfolio : AppCompatActivity() {
             addProjectButton.visibility = View.GONE
             NombreEmpresa.visibility = View.GONE
             textoProyectos.visibility = View.GONE
+        }
+        // Configurar el Intent para navegar a ProjectCreation
+        addProjectButton.setOnClickListener {
+            val intent = Intent(this, ProjectCreation::class.java)
+            startActivity(intent)
         }
     }
 }
