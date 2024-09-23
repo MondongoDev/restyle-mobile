@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="SeeReviewsAndOpinions">
+
+    <!-- Init Toolbar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="85dp"
+            android:paddingTop="15dp"
+            android:backgroundTint="#3F51B5">
+
+            <ImageView
+                android:id="@+id/toolbar_logo"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginEnd="8dp"
+                android:contentDescription="Restyle Logo"
+                android:src="@drawable/restyle_logo" />
+
+            <TextView
+                android:id="@+id/toolbar_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="ReStyle"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <Space
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"/>
+
+            <!--User Picture in Toolbar-->
+            <ImageView
+                android:id="@+id/toolbar_client"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:contentDescription="User Picture"
+                android:src="@drawable/user"
+                android:visibility="visible"/>
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </LinearLayout>
+    <!-- End Toolbar -->
+
+    <!-- Init Content -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:padding="16dp">
+
+            <!-- Project Title -->
+            <TextView
+                android:id="@+id/project_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="RenovaPro"
+                android:textColor="#3F51B5"
+                android:textSize="24sp"
+                android:textAlignment="center"/>
+
+            <!-- Project Image -->
+            <ImageView
+                android:id="@+id/project_image"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/picture"
+                android:scaleType="centerCrop"/>
+
+            <!-- Project Description -->
+            <TextView
+                android:id="@+id/project_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Renovación de habitación matrimonial. Creamos un espacio elegante y funcional que superó las expectativas de los propietarios."
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:textAlignment="center"/>
+
+            <!-- Review Section Title -->
+            <TextView
+                android:id="@+id/review_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Reseña"
+                android:fontFamily="@font/montserrat_bold"
+                android:textColor="#3F51B5"
+                android:textSize="20sp"/>
+
+            <!-- Review Card -->
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:layout_marginTop="8dp"
+                android:elevation="4dp">
+
+                <TextView
+                    android:id="@+id/review_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Me gustó mucho la remodelación! Gracias"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp">
+
+                    <!-- Client Information -->
+                    <TextView
+                        android:id="@+id/client_info"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="👤 Cliente: María Cáceres"
+                        android:textSize="14sp"
+                        android:textColor="@color/black"/>
+
+                    <!-- Duration -->
+                    <TextView
+                        android:id="@+id/duration_info"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="⏳ Duración: 4 días"
+                        android:textSize="14sp"
+                        android:textColor="@color/black"/>
+
+                </LinearLayout>
+
+                <!-- Rating -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="⭐ Valoración: 4 estrellas"
+                        android:textSize="14sp"
+                        android:textColor="@color/black"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- Add Review Button -->
+            <Button
+                android:id="@+id/add_review_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Agregar Reseña"
+                android:backgroundTint="#3F51B5"
+                android:textColor="@color/white"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+    <!-- End Content -->
+
+    <!-- Init Footer -->
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Bottom Navigation -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottom_navigation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#3F51B5"
+                app:itemIconTint="@color/white"
+                app:itemTextAppearanceActive="@style/BottomNavigationTextAppearance"
+                app:itemTextAppearanceInactive="@style/BottomNavigationTextAppearance"
+                app:itemTextColor="@color/white"
+                app:labelVisibilityMode="labeled"
+                android:layout_alignParentBottom="true"
+                app:menu="@menu/bottom_navigation_menu"/>
+        </RelativeLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    <!-- End Footer -->
+</LinearLayout>
